@@ -26,8 +26,9 @@
               color="secondary"
               x-large
               outlined
+              href="/login"
             >
-              Sign In
+              Login
             </v-btn>
           </v-flex>
         </v-layout>
