@@ -1,8 +1,8 @@
-# QwikGeo Website
+# QwikGeo UI
 
-URL: https://qwikgeo.com/
+URL: https://app.qwikgeo.com/
 
-This repo is created to host QwikGeo's website code.
+This repo is created to host QwikGeo's app code.
 
 ## Project setup
 ```
