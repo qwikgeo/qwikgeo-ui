@@ -10,5 +10,5 @@ jobs:
       uses: xRealNeon/VuePagesAction@1.0.0
       with:
         username: 'qwikgeo'
-        reponame: 'qwikgeo-website'
+        reponame: 'qwikgeo-ui'
         token: ${{ secrets.GITHUB_TOKEN }}
