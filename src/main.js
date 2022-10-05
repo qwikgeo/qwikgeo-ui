@@ -12,6 +12,7 @@ import '@/styles/styles.scss'
 Vue.config.productionTip = false;
 
 Vue.prototype.globalFunctions = globalFunctions;
+Vue.prototype.GOOGLE_CLIENT_ID = "406362590745-cj472811c26nu77fm5m981vkvk2ph8me.apps.googleusercontent.com";
 
 if(window.location.href.includes('localhost')){
   Vue.prototype.apiUrl = 'http://127.0.0.1:8000'
@@ -21,7 +22,7 @@ if(window.location.href.includes('localhost')){
 }
 
 Vue.use(LoaderPlugin, {
-  client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+  client_id: Vue.prototype.GOOGLE_CLIENT_ID,
 });
 
 Vue.use(VueHead);

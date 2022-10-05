@@ -33,11 +33,11 @@
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list-item v-if="authenticated">
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+            <v-img :src="imageUrl"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Name Here</v-list-item-title>
+            <v-list-item-title>{{firstName}} {{lastName}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -70,6 +70,9 @@ export default {
   data: () => ({
     drawer: false,
     authenticated: false,
+    imageUrl: '',
+    firstName: '',
+    lastName: '',
     urls: [
       {
         title: "Home",
@@ -82,15 +85,28 @@ export default {
         url: "/map_builder/",
       },
       {
-        title: "Portal Search",
+        title: "Search",
         icon: "mdi-magnify",
-        url: "/portal_search/",
+        url: "/search/",
       }
     ],
   }),
   mounted() {
     if(localStorage.getItem('qwikgeo_access_token')){
       this.authenticated = true
+      this.globalFunctions.httpRequest(
+        "get",
+        `${this.apiUrl}/api/v1/authentication/user`,
+        undefined,
+        true
+      )
+        .then((res) => {
+          if (res.status == 200) {
+            this.firstName = res.data.first_name;
+            this.lastName = res.data.last_name;
+            this.imageUrl = res.data.photo_url;
+          }
+        })
     }
   },
   methods:{

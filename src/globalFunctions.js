@@ -22,7 +22,7 @@ export const globalFunctions = {
     };
 
     if (auth) {
-      parameters.headers["Authorization"] = `Token ${localStorage.getItem(
+      parameters.headers["Authorization"] = `Bearer ${localStorage.getItem(
         "qwikgeo_access_token"
       )}`;
     }
