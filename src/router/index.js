@@ -5,22 +5,22 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/qwikgeo-ui/',
+    path: '/',
     name: 'Home',
     component: () => import('../views/HomeView.vue')
   },
   {
-    path: '/qwikgeo-ui/login/',
+    path: '/login/',
     name: 'Login',
     component: () => import('../views/LoginView.vue')
   },
   {
-    path: '/qwikgeo-ui/register/',
+    path: '/register/',
     name: 'Register',
     component: () => import('../views/RegisterView.vue')
   },
   {
-    path: '/qwikgeo-ui/map_builder/',
+    path: '/map_builder/',
     name: 'Map Builder',
     component: () => import('../views/MapBuilder.vue')
   },
