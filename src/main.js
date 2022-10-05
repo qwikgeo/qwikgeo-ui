@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
-// import VueHead from "vue-head";
 import {globalFunctions} from './globalFunctions';
 
 import { LoaderPlugin } from "vue-google-login";
@@ -24,8 +23,6 @@ if(window.location.href.includes('localhost')){
 Vue.use(LoaderPlugin, {
   client_id: Vue.prototype.GOOGLE_CLIENT_ID,
 });
-
-// Vue.use(VueHead);
 
 new Vue({
   router,

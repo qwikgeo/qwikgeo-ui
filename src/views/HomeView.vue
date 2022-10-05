@@ -47,7 +47,7 @@ export default {
 <style>
 
 .hero-banner{
-  height: 95vh;
+  height: 100vh;
 }
 
 html{
