@@ -10,22 +10,22 @@ const routes = [
     component: () => import('../views/HomeView.vue')
   },
   {
-    path: '/login',
+    path: '/login/',
     name: 'Login',
     component: () => import('../views/LoginView.vue')
   },
   {
-    path: '/register',
+    path: '/register/',
     name: 'Register',
     component: () => import('../views/RegisterView.vue')
   },
   {
-    path: '/map_builder',
+    path: '/map_builder/',
     name: 'Map Builder',
     component: () => import('../views/MapBuilder.vue')
   },
   {
-    path: '/search',
+    path: '/search/',
     name: 'Search',
     component: () => import('../views/SearchView.vue')
   }
