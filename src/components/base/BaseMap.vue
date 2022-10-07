@@ -28,7 +28,7 @@ export default {
           return {              
             url: url,
             headers: {
-              Authorization: `Token ${localStorage.getItem(
+              Authorization: `Bearer ${localStorage.getItem(
                 "qwikgeo_access_token"
               )}`,
             },

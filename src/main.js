@@ -16,8 +16,8 @@ Vue.prototype.GOOGLE_CLIENT_ID = "406362590745-cj472811c26nu77fm5m981vkvk2ph8me.
 if(window.location.href.includes('localhost')){
   Vue.prototype.apiUrl = 'http://127.0.0.1:8000'
 }else{
-  // Vue.prototype.apiUrl = 'https://api.qwikgeo.com'
-  Vue.prototype.apiUrl = 'http://127.0.0.1:8000'
+  Vue.prototype.apiUrl = 'https://api.qwikgeo.com'
+  // Vue.prototype.apiUrl = 'http://127.0.0.1:8000'
 }
 
 Vue.use(LoaderPlugin, {

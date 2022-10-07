@@ -81,21 +81,22 @@ export default {
       latitude: 40,
       longitude: -96,
       zoom: 3,
-      basemap: "streets",
+      basemap: "dark",
       layers: [],
       notification_access_list: [],
-      write_access_list: ["michaelkeller03"],
-      read_access_list: ["michaelkeller03"],
-      updated_username: "michaelkeller03",
-      username: "michaelkeller03",
+      write_access_list: [],
+      read_access_list: [],
+      updated_username: "",
+      username: "",
       searchable: true,
       openRightIcon: undefined,
       openRightPanel: undefined,
       openLeftIcon: undefined,
       openLeftPanel: undefined,
       savedMap: false,
-      searchForLayers: false,
+      searchForLayers: true,
       activeLayerId: undefined,
+      layerCounter: 0
     },
     left_nav_items: [
       {
@@ -242,6 +243,18 @@ export default {
     if(localStorage.getItem('qwikgeo_access_token') === null){
       this.$router.push({ name: 'Login', query: { redirect: `${window.location.pathname}${window.location.search}` } });
     }
+    this.globalFunctions.httpRequest(
+        "get",
+        `${this.apiUrl}/api/v1/authentication/user`,
+        undefined,
+        true
+      )
+        .then((res) => {
+          this.read_access_list = [res.data.username]
+          this.write_access_list = [res.data.username]
+          this.username = res.data.username
+          this.updated_username = res.data.username
+        })
     if(this.$route.query.map_id){
       this.globalFunctions
         .httpRequest(
@@ -263,10 +276,8 @@ export default {
             return;
           }
           for(let prop in res.data) {
-            console.log(prop)
             this.$set(this.appData, prop, res.data[prop]);
           }
-          console.log(this.appData)
         })
     }
   },
@@ -319,13 +330,10 @@ export default {
           }
         }
       }
-      console.log(icon.slug )
       if(icon.slug === 'new_map'){
         document.location.href = '/map_builder/'
       }
       else if(icon.slug === 'print'){
-        // TODO
-        console.log(this.appData.map.getCanvas().toDataURL())
         var a = document.createElement('a');
         a.download = 'map.png';
         a.href = this.appData.map.getCanvas().toDataURL();

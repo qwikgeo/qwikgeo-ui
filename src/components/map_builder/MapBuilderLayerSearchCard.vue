@@ -1,9 +1,9 @@
 <template>
   <v-card class="my-2">
-    <v-img
+    <!-- <v-img
       :src="image"
-      lazy-src="https://picsum.photos/id/11/100/60"
       height="150"
+      
     >
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
@@ -13,7 +13,7 @@
           ></v-progress-circular>
         </v-row>
       </template>
-    </v-img>
+    </v-img> -->
 
     <v-card-title>{{ layer.title }}</v-card-title>
 
@@ -40,7 +40,7 @@ export default {
     },
   },
   data: () => ({
-    image: "",
+    image: '',
     loading: false
   }),
   mounted() {
@@ -50,57 +50,39 @@ export default {
       this.globalFunctions
         .httpRequest(
           "get",
-          `${this.apiUrl}/api/v1/tables/table_image/?table_id=${this.layer.table_id}`,
+          `${this.apiUrl}/api/v1/items/${this.layer.url}`,
           undefined,
           true
         )
         .then((res) => {
-          this.image = res.data;
+          console.log(res.data)
         });
-    } else if (this.layer.map_type === "map_layer") {
-      this.image = `/images/maps/${this.layer.table_id}.png`;
-    }
+    } 
+    // else if (this.layer.map_type === "map_layer") {
+    //   this.image = undefined
+    // }
   },
   methods: {
     addToMap() {
       this.loading = true;
-      if (this.layer.map_type === "user_data") {
-        if (this.layer.geometry_type === "point") {
-          this.layer.paint = {
+      if (this.layer.map_type === "user_data" || this.layer.map_type === "map_layer") {
+        if (this.layer.geometry === "point") {
+          this.$set(this.layer, "paint", {
             "circle-color": "#FFE633",
-          };
-        } else if (this.layer.geometry_type === "line") {
-          this.layer.paint = {
+          })
+        } else if (this.layer.geometry === "line") {
+          this.$set(this.layer, "paint", {
             "line-color": "#FFE633",
-          };
-        } else if (this.layer.geometry_type === "polygon") {
-          this.layer.border_paint = {
+          });
+        } else if (this.layer.geometry === "polygon") {
+          this.$set(this.layer, "border_paint", {
             "line-color": "#4D4C41",
-          };
+          });
 
-          this.layer.fill_paint = {
+          this.$set(this.layer, "fill_paint",  {
             "fill-color": "#FFE633",
             "fill-opacity": 0.3
-          };
-        }
-      } else if (this.layer.map_type === "map_layer") {
-        if (this.layer.geometry_type === "point") {
-          this.layer.paint = {
-            "circle-color": "#FFE633",
-          };
-        } else if (this.layer.geometry_type === "line") {
-          this.layer.paint = {
-            "line-color": "#FFE633",
-          };
-        } else if (this.layer.geometry_type === "polygon") {
-          this.layer.border_paint = {
-            "line-color": "#4D4C41",
-          };
-
-          this.layer.fill_paint = {
-            "fill-color": "#FFE633",
-            "fill-opacity": 0.3
-          };
+          });
         }
       }
       this.globalFunctions

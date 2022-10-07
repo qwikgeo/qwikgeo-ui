@@ -27,10 +27,10 @@
           Search
         </v-btn>
       </v-form>
-      <div v-if="searchResults.length > 0">
+      <div v-if="searchResults.length > 0" style="height: 70vh; overflow: scroll">
         <v-divider />
         <div v-for="(result, index) in searchResults" :key="index">
-          <!-- <map-builder-layer-search-card :layer="result" :appData="appData"/> -->
+          <map-builder-layer-search-card :layer="result" :appData="appData"/>
         </div>
       </div>
     </div>
@@ -52,13 +52,13 @@
 </template>
 
 <script>
-// import MapBuilderLayerSearchCard from "./MapBuilderLayerSearchCard.vue";
+import MapBuilderLayerSearchCard from "./MapBuilderLayerSearchCard.vue";
 
 /* eslint-disable */
 
 export default {
   components: {
-    // MapBuilderLayerSearchCard,
+    MapBuilderLayerSearchCard,
   },
   name: "MapBuilderLayersSearchPanel",
   props: {
@@ -99,18 +99,19 @@ export default {
         this.globalFunctions
           .httpRequest(
             "get",
-            `${this.apiUrl}/api/v1/tables/${this.layerType}_tables/?search=${this.searchTerm}`,
+            `${this.apiUrl}/api/v1/items/`,
             undefined,
             true
           )
           .then((res) => {
+            this.loading = false;
             if (res.status != 200) {
               this.appData.alert = JSON.stringify(res.data);
             }
-            res.data.results.forEach((result) => {
+            res.data.forEach((result) => {
               result.map_type = "user_data";
             });
-            this.searchResults = res.data.results;
+            this.searchResults = res.data;
             this.loading = false;
           });
       } else if (this.layerType === "portal") {
@@ -126,8 +127,6 @@ export default {
               this.appData.alert = JSON.stringify(res.data);
             }
             res.data.forEach((result) => {
-              result.title = result.display_name;
-              result.table_id = result.table_name;
               result.map_type = "map_layer";
             });
             this.searchResults = res.data;

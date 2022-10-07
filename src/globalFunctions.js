@@ -4,8 +4,8 @@ let apiUrl = "";
 if(window.location.href.includes('localhost')){
   apiUrl = 'http://127.0.0.1:8000'
 }else{
-  // apiUrl = 'https://api.qwikgeo.com'
-  apiUrl = 'http://127.0.0.1:8000'
+  apiUrl = 'https://api.qwikgeo.com'
+  // apiUrl = 'http://127.0.0.1:8000'
 }
 
 export const globalFunctions = {
@@ -112,53 +112,46 @@ export const globalFunctions = {
   // Add a layer to the map
   addLayerToMap: (layer, appData, map, newLayer = true) => {
     return new Promise((resolve) => {
+      console.log(layer)
       layer.mapboxName = `map_service_${appData.layerCounter}`;
       if (layer.map_type === "user_data" || layer.map_type === "map_layer" ) {
-        let db = 'default_maps'
-        if (layer.map_type === "user_data"){
-          db = 'user_data'
-        }
         map.addSource(layer.mapboxName, {
           type: "vector",
           tiles: [
-            `${apiUrl}/api/v1/tiles/${db}/${layer.table_id}/{z}/{x}/{y}.pbf?fields=gid`,
+            `${apiUrl}/api/v1/collections/${layer.id}/tiles/WorldCRS84Quad/{z}/{x}/{y}`,
           ],
           minzoom: 1,
           maxzoom: 22,
         });
-        if (layer.geometry_type === "polygon") {
+        if (layer.geometry === "polygon") {
           map.addLayer({
-            id: `${layer.mapboxName}fill`,
+            id: `${layer.mapboxName}_fill`,
             type: "fill",
             source: layer.mapboxName,
-            'source-layer': 'default',
-            // layout: layer.layout,
+            'source-layer': layer.id,
             paint: layer.fill_paint,
           });
           map.addLayer({
             id: `${layer.mapboxName}_line`,
             type: "line",
             source: layer.mapboxName,
-            'source-layer': 'default',
-            // layout: layer.layout,
+            'source-layer': layer.id,
             paint: layer.border_paint,
           });
-        } else if (layer.geometry_type === "line") {
+        } else if (layer.geometry === "line") {
           map.addLayer({
             id: layer.mapboxName,
             type: "line",
             source: layer.mapboxName,
-            'source-layer': 'default',
-            // layout: layer.layout,
+            'source-layer': layer.id,
             paint: layer.paint,
           });
-        } else if (layer.geometry_type === "point") {
+        } else if (layer.geometry === "point") {
           map.addLayer({
             id: layer.mapboxName,
             type: "circle",
             source: layer.mapboxName,
-            'source-layer': 'default',
-            // layout: layer.layout,
+            'source-layer': layer.id,
             paint: layer.paint,
           });
         }
