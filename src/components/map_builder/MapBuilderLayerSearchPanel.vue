@@ -1,7 +1,6 @@
 <template>
 <div>
-  <h2>Layers</h2>
-  <v-divider/>
+  <p>Layer Search</p>
 </div>
 </template>
 

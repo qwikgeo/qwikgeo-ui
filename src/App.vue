@@ -96,7 +96,7 @@ export default {
       this.authenticated = true
       this.globalFunctions.httpRequest(
         "get",
-        `${this.apiUrl}/api/v1/authentication/user`,
+        `${this.apiUrl}/api/v1/users/user`,
         undefined,
         true
       )

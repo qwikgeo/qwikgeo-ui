@@ -50,12 +50,13 @@ export default {
       this.globalFunctions
         .httpRequest(
           "get",
-          `${this.apiUrl}/api/v1/items/${this.layer.url}`,
+          `${this.apiUrl}/api/v1/collections/user_data.${this.layer.table[0].table_id}`,
           undefined,
           true
         )
         .then((res) => {
-          console.log(res.data)
+          this.$set(this.layer, "geometry", res.data.geometry)
+          this.$set(this.layer, "id", res.data.id)
         });
     } 
     // else if (this.layer.map_type === "map_layer") {
