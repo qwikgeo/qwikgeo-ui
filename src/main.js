@@ -29,3 +29,36 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.prototype.mapboxToken = "pk.eyJ1IjoibWtlbGxlcjMiLCJhIjoieFdYUUg5TSJ9.qzhP1v5f1elHrnTV4YpkiA"
+
+Vue.prototype.basemaps = [
+    {
+        "name": "Streets",
+        "styleID": "mapbox/streets-v11"
+    },
+    {
+        "name": "Outdoors",
+        "styleID": "mapbox/outdoors-v11"
+    },
+    {
+        "name": "Light",
+        "styleID": "mapbox/light-v10"
+    },
+    {
+        "name": "Dark",
+        "styleID": "mapbox/dark-v10"
+    },
+    {
+        "name": "Satellite ",
+        "styleID": "mapbox/satellite-v9"
+    },
+    {
+        "name": "Satellite Streets",
+        "styleID": "mapbox/satellite-streets-v11"
+    },
+    {
+        "name": "Navigation Day",
+        "styleID": "mapbox/navigation-day-v1"
+    }
+]

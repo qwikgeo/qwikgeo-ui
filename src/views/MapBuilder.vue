@@ -33,7 +33,7 @@
       <BaseMap :appData.sync="appData" />
     </v-col>
     <map-builder-right-panel :appData="appData" style="max-width: 25%"/>
-    <v-navigation-drawer fluid expand-on-hover permanent right>
+    <v-navigation-drawer fluid expand-on-hover permanent right v-if="appData.activeLayerId != null">
       <v-row class="fill-height" no-gutters fluid>
         <v-navigation-drawer
           dark
@@ -90,9 +90,9 @@ export default {
       username: "",
       searchable: true,
       openRightIcon: undefined,
-      openRightPanel: undefined,
-      openLeftIcon: undefined,
-      openLeftPanel: undefined,
+      openRightPanel: false,
+      openLeftIcon: "layers",
+      openLeftPanel: true,
       savedMap: false,
       searchForLayers: true,
       activeLayerId: undefined,
@@ -111,12 +111,12 @@ export default {
         slug: "new_map",
         openPanel: false,
       },
-      {
-        title: "Open Existing Maps",
-        icon: "mdi-map-search",
-        slug: "existing_maps",
-        openPanel: true,
-      },
+    //   {
+    //     title: "Open Existing Maps",
+    //     icon: "mdi-map-search",
+    //     slug: "existing_maps",
+    //     openPanel: true,
+    //   },
       {
         title: "Import Data",
         icon: "mdi-plus-box-multiple",
@@ -124,9 +124,15 @@ export default {
         openPanel: false,
       },
       {
-        title: "Map Layers",
+        title: "Layers",
         icon: "mdi-layers-triple",
         slug: "layers",
+        openPanel: true,
+      },
+      {
+        title: "Layer Search",
+        icon: "mdi-map-search-outline",
+        slug: "layer_search",
         openPanel: true,
       },
       {

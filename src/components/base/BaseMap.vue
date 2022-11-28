@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     const vr = this;
-    mapboxgl.accessToken = "pk.eyJ1IjoibWtlbGxlcjMiLCJhIjoieFdYUUg5TSJ9.qzhP1v5f1elHrnTV4YpkiA";
+    mapboxgl.accessToken = this.mapboxToken;
     let map = new mapboxgl.Map({
       container: "mapboxgl-map",
       style: `mapbox://styles/mapbox/${this.appData.basemap}-v10`,
@@ -54,4 +54,30 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+.mapboxgl-popup-content{
+    width: 300px;
+    max-height: 400px;
+    overflow: auto
+}
+
+.mapboxgl-popup-close-button{
+    font-size: 1.5rem;
+}
+
+td {
+    border: 1px solid black;
+    padding-left: .2rem
+}
+
+tr {
+    border: 1px solid black;
+    width: 100%;
+}
+
+table { 
+    border-collapse: collapse;
+    width: 100%;
+}
+
 </style>

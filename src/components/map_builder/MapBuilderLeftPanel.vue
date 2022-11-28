@@ -16,9 +16,13 @@
       :appData="appData"
       v-if="this.appData.openLeftIcon === 'help'"
     />
-    <map-builder-layers-search-panel
+    <map-builder-layers-panel
       :appData="appData"
       v-if="this.appData.openLeftIcon === 'layers'"
+    />
+    <map-builder-layer-search-panel
+      :appData="appData"
+      v-if="this.appData.openLeftIcon === 'layer_search'"
     />
     <map-builder-legend-panel
       :appData="appData"
@@ -45,7 +49,8 @@ import MapBuilderAnalysisPanel from "./MapBuilderAnalysisPanel.vue";
 import MapBuilderBasemapPanel from "./MapBuilderBasemapPanel.vue";
 import MapBuilderDrawPanel from "./MapBuilderDrawPanel.vue";
 import MapBuilderHelpPanel from "./MapBuilderHelpPanel.vue";
-import MapBuilderLayersSearchPanel from "./MapBuilderLayersSearchPanel.vue";
+import MapBuilderLayerSearchPanel from "./MapBuilderLayerSearchPanel.vue";
+import MapBuilderLayersPanel from "./MapBuilderLayersPanel.vue";
 import MapBuilderLegendPanel from "./MapBuilderLegendPanel.vue";
 import MapBuilderMapSearchPanel from "./MapBuilderMapSearchPanel.vue";
 // import MapBuilderModalSaveMap from './MapBuilderModalSaveMap.vue';
@@ -58,7 +63,8 @@ export default {
     MapBuilderAnalysisPanel,
     MapBuilderDrawPanel,
     MapBuilderHelpPanel,
-    MapBuilderLayersSearchPanel,
+    MapBuilderLayerSearchPanel,
+    MapBuilderLayersPanel,
     MapBuilderLegendPanel,
     MapBuilderMapSearchPanel,
     MapBuilderQueryDataPanel,
